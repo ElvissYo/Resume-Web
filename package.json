@@ -1,5 +1,5 @@
 {
     "dependencies": {
-        "@resend/node": "^0.7.0"
+        "resend": "^1.0.0"
     }
 }
