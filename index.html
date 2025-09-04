@@ -1,0 +1,1668 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yose Elvis - Data Enthusiasts</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+    <style>
+        /* General Styles */
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            color: #2D2D2D; /* Charcoal Gray for main text */
+            background-color: #E9ECEF; /* Light Gray for background */
+            overflow: hidden; /* For loading animation */
+        }
+
+        #preloader {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease;
+        }
+
+        #preloader.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .spinner {
+            border: 8px solid #f3f3f3;
+            border-top: 8px solid #0E6B63;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            margin: 0;
+            color: #0E6B63; /* Dark Teal for headings */
+        }
+
+        p {
+            line-height: 1.6;
+            margin: 0 0 1rem;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 25px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            background-color: #8CE8C3; /* Soft Mint for buttons */
+            color: #2D2D2D; /* Charcoal Gray for button text */
+            border: 2px solid #8CE8C3;
+        }
+
+        .btn.primary {
+            background-color: #8CE8C3;
+            color: #2D2D2D;
+            border: 2px solid #8CE8C3;
+        }
+
+        .btn.secondary {
+            background-color: transparent;
+            color: #8CE8C3;
+            border: 2px solid #8CE8C3;
+        }
+
+        .btn.primary:hover {
+            background-color: #6bc7a2;
+            border-color: #6bc7a2;
+        }
+
+        .btn.secondary:hover {
+            background-color: #8CE8C3;
+            color: #2D2D2D;
+        }
+
+        /* Header */
+        header {
+            background-color: #0E6B63; /* Dark Teal for navbar */
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            transition: top 0.3s ease;
+        }
+
+        @keyframes slideDown {
+            from {
+                top: -100px;
+            }
+            to {
+                top: 0;
+            }
+        }
+
+        header {
+            animation: slideDown 0.5s ease-out;
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+        }
+
+        .logo {
+            font-weight: 800;
+            font-size: 24px;
+            color: #fff; /* White for logo on dark teal */
+        }
+
+        header nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+
+        header nav ul li {
+            margin-left: 25px;
+        }
+
+        header nav ul li a {
+            text-decoration: none;
+            color: #fff; /* White for nav links */
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        header nav ul li a:hover {
+            color: #8CE8C3; /* Soft Mint for active/hover links */
+        }
+
+        .nav-icon {
+            width: 20px;
+            height: 20px;
+            vertical-align: middle;
+            margin-left: 5px;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #1a8c82 100%); /* Teal gradient */
+            color: #fff;
+            padding-top: 100px;
+            padding-bottom: 50px;
+            min-height: 80vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Curved Bottom Shape */
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 150px;
+            background: inherit; /* Inherits the gradient from .hero */
+            clip-path: ellipse(150% 100% at 50% 100%);
+            z-index: 1;
+        }
+
+        /* Geometric Shapes */
+        .geometric-shapes {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+
+        .shape {
+            position: absolute;
+            opacity: 0.2;
+            animation: float 15s ease-in-out infinite;
+        }
+
+        /* Circle Shapes */
+        .circle-1 {
+            width: 150px;
+            height: 150px;
+            background: #8CE8C3; /* Soft Mint */
+            border-radius: 50%;
+            top: 10%;
+            left: 15%;
+        }
+
+        .circle-2 {
+            width: 80px;
+            height: 80px;
+            background: #8CE8C3; /* Soft Mint */
+            border-radius: 50%;
+            top: 60%;
+            left: 70%;
+            animation-delay: -5s;
+        }
+
+        /* Triangle Shapes */
+        .triangle-1 {
+            width: 0;
+            height: 0;
+            border-left: 60px solid transparent;
+            border-right: 60px solid transparent;
+            border-bottom: 100px solid #8CE8C3; /* Soft Mint */
+            top: 30%;
+            left: 80%;
+            animation-delay: -10s;
+        }
+
+        .triangle-2 {
+            width: 0;
+            height: 0;
+            border-left: 40px solid transparent;
+            border-right: 40px solid transparent;
+            border-bottom: 70px solid #8CE8C3; /* Soft Mint */
+            top: 70%;
+            left: 20%;
+            animation-delay: -2s;
+        }
+
+        /* Hexagon Shapes */
+        .hexagon-1 {
+            width: 100px;
+            height: 57.74px;
+            background: #8CE8C3; /* Soft Mint */
+            top: 20%;
+            left: 50%;
+            position: absolute;
+            animation-delay: -7s;
+        }
+
+        .hexagon-1::before,
+        .hexagon-1::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            border-left: 50px solid transparent;
+            border-right: 50px solid transparent;
+        }
+
+        .hexagon-1::before {
+            bottom: 100%;
+            border-bottom: 28.87px solid #8CE8C3; /* Soft Mint */
+        }
+
+        .hexagon-1::after {
+            top: 100%;
+            border-top: 28.87px solid #8CE8C3; /* Soft Mint */
+        }
+
+        .hexagon-2 {
+            width: 70px;
+            height: 40.41px;
+            background: #8CE8C3; /* Soft Mint */
+            top: 50%;
+            left: 10%;
+            position: absolute;
+            animation-delay: -12s;
+        }
+
+        .hexagon-2::before,
+        .hexagon-2::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            border-left: 35px solid transparent;
+            border-right: 35px solid transparent;
+        }
+
+        .hexagon-2::before {
+            bottom: 100%;
+            border-bottom: 20.21px solid #8CE8C3; /* Soft Mint */
+        }
+
+        .hexagon-2::after {
+            top: 100%;
+            border-top: 20.21px solid #8CE8C3; /* Soft Mint */
+        }
+
+        /* Floating Animation for Shapes */
+        @keyframes float {
+            0% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-30px);
+            }
+            100% {
+                transform: translateY(0);
+            }
+        }
+
+        .hero .container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 40px;
+            z-index: 2; /* Ensure content is above background shapes */
+        }
+
+        .hero-content {
+            max-width: 50%;
+        }
+
+        .hero-content h1 {
+            font-size: 4rem;
+            margin: 10px 0 20px;
+            color: #fff;
+            display: inline-block;
+            white-space: nowrap;
+        }
+
+        .hero-content p {
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .hero-buttons {
+            margin-top: 30px;
+            display: flex;
+            gap: 15px;
+        }
+
+        .hero-image {
+            max-width: 45%;
+            opacity: 0;
+            transform: translateX(100%);
+            transition: opacity 1s ease, transform 1s ease;
+        }
+
+        .hero-image.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .hero-image img {
+            max-width: 100%;
+            height: auto;
+            animation: floatHeroImage 6s ease-in-out infinite; /* Apply the animation */
+        }
+
+        /* Floating animation for hero image */
+        @keyframes floatHeroImage {
+            0% {
+                transform: translate(0, 0);
+            }
+            25% {
+                transform: translate(10px, -10px); /* Move right and up */
+            }
+            50% {
+                transform: translate(-10px, 10px); /* Move left and down */
+            }
+            75% {
+                transform: translate(10px, 10px); /* Move right and down */
+            }
+            100% {
+                transform: translate(0, 0); /* Return to original position */
+            }
+        }
+
+        /* Typing animation for hero-content h1 */
+        @keyframes typing {
+            from {
+                width: 0;
+            }
+            to {
+                width: 100%;
+            }
+        }
+
+        @keyframes blink-caret {
+            50% {
+                border-color: transparent;
+            }
+        }
+
+        .typing-text {
+            display: inline-block;
+            overflow: hidden;
+            white-space: nowrap;
+            border-right: 3px solid #fff; /* Blinking cursor */
+            animation: typing 3s steps(30, end) forwards, blink-caret 0.75s step-end infinite;
+        }
+
+        /* Reset animation for text change */
+        .reset-typing {
+            animation: none;
+        }
+
+        /* Sections General */
+        section {
+            padding: 80px 0;
+            position: relative; /* Ensure sections with shapes can position them relatively */
+        }
+
+        section h2 {
+            font-size: 1.2rem;
+            font-weight: 500;
+            color: #0E6B63; /* Dark Teal */
+            text-align: center;
+        }
+
+        section h3 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        /* About Section */
+        .about {
+            background-color: #fff;
+        }
+
+        .about .container {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+        }
+
+        .about-content {
+            flex: 1;
+            opacity: 0;
+            transform: translateX(-50px);
+            transition: opacity 1s ease, transform 1s ease;
+        }
+
+        .about-content.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .about-content h2, .about-content h3 {
+            text-align: left;
+        }
+
+        .about-content h3 {
+            font-size: 2.2rem;
+            margin-bottom: 20px;
+        }
+
+        .about-content h4 {
+            font-size: 1.5rem;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+
+        .about-image {
+            flex: 1;
+            text-align: center;
+            opacity: 0;
+            transform: translateX(50px);
+            transition: opacity 1s ease, transform 1s ease;
+        }
+
+        .about-image.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .about-image img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            border: 5px solid #fff;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .hobbies {
+            display: flex;
+            gap: 30px;
+        }
+
+        .hobby-item {
+            text-align: center;
+        }
+
+        .hobby-item a {
+            display: block;
+            text-decoration: none;
+        }
+
+        .hobby-item i {
+            font-size: 32px;
+            color: #0E6B63; /* Dark Teal to match theme */
+            transition: transform 0.3s ease;
+        }
+
+        .hobby-item i:hover {
+            transform: scale(1.1);
+        }
+
+        .hobby-item p {
+            margin-top: 5px;
+            font-size: 0.9rem;
+            color: #777;
+        }
+
+        /* Experience Section */
+        .experience {
+            background: linear-gradient(to right, #0E6B63, #1a8c82);
+        }
+
+        .experience h3 {
+            color: #fff; /* White for better contrast */
+        }
+
+        .title-experience {
+            text-decoration-color: #fff;
+        }
+
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px 0;
+            z-index: 2; /* Ensure content is above shapes */
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 1s ease, transform 1s ease;
+        }
+
+        .timeline.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .timeline-item {
+            position: relative;
+            padding-left: 60px;
+            margin-bottom: 50px;
+        }
+
+        .timeline-item::before {
+            content: '';
+            left: 25px;
+            top: 20px;
+            bottom: -50px;
+            width: 2px;
+            background: #ddd;
+            position: absolute;
+        }
+
+        .timeline-item:last-child::before {
+            bottom: 0;
+        }
+
+        .timeline-icon {
+            position: absolute;
+            left: 10px;
+            top: 10px;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: #0E6B63; /* Dark Teal */
+            color: #fff;
+            text-align: center;
+            line-height: 30px;
+            font-size: 16px;
+            border: 2px solid #ddd;
+        }
+
+        .timeline-content {
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .timeline-content h4 {
+            font-size: 1.2rem;
+            color: #0E6B63; /* Dark Teal */
+        }
+
+        .timeline-content h5 {
+            font-size: 1rem;
+            color: #2D2D2D;
+        }
+
+        .timeline-content p {
+            color: #777;
+        }
+
+        .timeline-images {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .timeline-images img {
+            width: 200px;
+            height: auto;
+            border-radius: 5px;
+        }
+
+        .sub-timeline {
+            position: relative;
+            padding-left: 40px;
+            margin-top: 20px;
+        }
+
+        .sub-timeline-item {
+            position: relative;
+            padding-left: 40px;
+            margin-bottom: 30px;
+        }
+
+        .sub-timeline-item::before {
+            content: '';
+            left: 15px;
+            top: 15px;
+            bottom: -30px;
+            width: 2px;
+            background: #eee;
+            position: absolute;
+        }
+
+        .sub-timeline-item:last-child::before {
+            bottom: 0;
+        }
+
+        .sub-timeline-icon {
+            position: absolute;
+            left: 5px;
+            top: 5px;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #1a8c82;
+            color: #fff;
+            text-align: center;
+            line-height: 20px;
+            font-size: 12px;
+            border: 2px solid #eee;
+        }
+
+        /* Certificate Section */
+        .certificate {
+            background-color: #fff;
+        }
+
+        .certificate .container {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 1s ease, transform 1s ease;
+        }
+
+        .certificate .container.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .certificate-carousel {
+            overflow: hidden;
+            position: relative;
+            width: 100vw;
+            left: calc(50% - 50vw);
+        }
+
+        .certificate-grid {
+            display: flex;
+            width: fit-content;
+            animation: slideRight 20s linear infinite;
+        }
+
+        @keyframes slideRight {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+
+        .certificate-item {
+            flex: 0 0 300px;
+            background: #f9f9f9;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            margin-right: 20px;
+        }
+
+        .certificate-item img {
+            width: 100%;
+            height: auto;
+            margin-top: 10px;
+        }
+
+        /* Skills Section */
+        .skills {
+            background: linear-gradient(to right, #0E6B63, #1a8c82);
+        }
+
+        .skills h2 {
+            font-size: 2.5rem;
+            color: #fff; /* White for better contrast */
+        }
+
+        .skills-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            z-index: 2; /* Ensure content is above shapes */
+            position: relative;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 1s ease, transform 1s ease;
+        }
+
+        .skills-container.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .skill-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            background-color: #fff;
+            border-radius: 10px;
+            padding: 20px;
+            width: 120px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
+        }
+
+        .skill-item:hover {
+            transform: scale(1.05);
+        }
+
+        .skill-item i {
+            font-size: 2.5rem;
+            color: #0E6B63; /* Dark Teal */
+        }
+
+        .skill-item span {
+            font-size: 0.9rem;
+            color: #2D2D2D;
+            font-weight: 500;
+        }
+
+        /* Project Section */
+        .project {
+            background-color: #fff;
+        }
+
+        .portfolio-carousel {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+            overflow: hidden;
+        }
+
+        .portfolio-slide {
+            display: none;
+            flex-direction: row;
+            align-items: center;
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .portfolio-slide.active {
+            display: flex;
+        }
+
+        .portfolio-slide img {
+            width: 100%;
+            max-width: 350px;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .portfolio-slide:not(.active) img,
+        .portfolio-slide:not(.active) h4 {
+            animation: bounce 2s ease-in-out infinite;
+        }
+
+        .portfolio-slide .content {
+            flex: 1;
+            text-align: left;
+        }
+
+        .portfolio-slide h4 {
+            font-size: 1.5rem;
+            color: #0E6B63;
+            margin-bottom: 10px;
+        }
+
+        .portfolio-slide p {
+            font-size: 1rem;
+            color: #777;
+        }
+
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        .carousel-controls {
+            position: absolute;
+            top: 50%;
+            z-index: 10;
+            left: 0.01rem;
+            right: 0.01rem;
+            display: flex;
+            justify-content: space-between;
+            transform: translateY(-50%);
+        }
+
+        .carousel-btn {
+            background: transparent;
+            border: none;
+            z-index: 10;
+            font-size: 2rem;
+            color: #0E6B63;
+            cursor: pointer;
+            padding: 0 20px;
+            transition: color 0.3s ease;
+        }
+
+
+        /* Contact Section */
+        .contact {
+            background: linear-gradient(to right, #0E6B63, #1a8c82); /* Teal gradient */
+            color: #fff;
+        }
+
+        .contact .container {
+            padding: 80px 20px;
+            z-index: 2; /* Ensure content is above shapes */
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 1s ease, transform 1s ease;
+        }
+
+        .contact .container.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .contact h2, .contact h3 {
+            color: #fff;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 50px;
+            background-color: #fff;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+            position: relative; /* Higher z-index for card */
+            z-index: 3;
+        }
+
+        .contact-info {
+            color: #2D2D2D;
+        }
+
+        .contact-info h4 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            color: #0E6B63;
+        }
+
+        .contact-info p {
+            font-size: 0.9rem;
+            color: #777;
+            margin-bottom: 20px;
+        }
+
+        .info-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .info-item span {
+            font-size: 1.5rem;
+        }
+
+        .social-icons {
+            margin-top: 30px;
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-icons a {
+            display: block;
+            width: 40px;
+            height: 40px;
+        }
+
+        .social-icons img {
+            width: 100%;
+            height: 100%;
+        }
+
+        .contact-form {
+            color: #2D2D2D;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            font-size: 1rem;
+            box-sizing: border-box;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .contact-form .btn {
+            width: 100%;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #0E6B63; /* Dark Teal */
+            color: #fff;
+            padding: 20px 0;
+            text-align: center;
+        }
+
+        footer .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .footer-logo {
+            font-weight: 800;
+            font-size: 20px;
+            color: #fff;
+        }
+
+        .footer-text p {
+            margin: 0;
+            font-size: 0.9rem;
+            color: #ccc;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 15px;
+            }
+
+            header .container {
+                flex-direction: column;
+                text-align: center;
+                padding-bottom: 10px;
+            }
+
+            header nav ul {
+                justify-content: center;
+                margin-top: 10px;
+            }
+
+            .hero .container {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .hero-content, .hero-image {
+                max-width: 100%;
+            }
+
+            .hero-content h1 {
+                font-size: 3rem;
+            }
+
+            .hero-buttons {
+                justify-content: center;
+            }
+
+            .about .container {
+                flex-direction: column;
+            }
+
+            .about-content h2, .about-content h3 {
+                text-align: center;
+            }
+
+            .hobbies {
+                justify-content: center;
+            }
+
+            .skills-container {
+                flex-direction: column;
+            }
+
+            .skill-item {
+                width: 100px;
+            }
+
+            .timeline-item {
+                padding-left: 50px;
+            }
+
+            .timeline-images {
+                flex-direction: column;
+            }
+
+            .timeline-images img {
+                width: 100%;
+            }
+
+            .certificate-item {
+                flex: 0 0 100%;
+            }
+
+            .portfolio-carousel {
+                max-width: 100%;
+            }
+
+            .portfolio-slide {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .portfolio-slide img {
+                max-width: 100%;
+            }
+
+            .portfolio-slide .content {
+                text-align: center;
+            }
+
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+
+            /* Adjust geometric shapes for smaller screens */
+            .circle-1 {
+                width: 100px;
+                height: 100px;
+                top: 15%;
+                left: 10%;
+            }
+
+            .circle-2 {
+                width: 60px;
+                height: 60px;
+                top: 65%;
+                left: 75%;
+            }
+
+            .triangle-1 {
+                border-left: 40px solid transparent;
+                border-right: 40px solid transparent;
+                border-bottom: 70px solid #8CE8C3;
+            }
+
+            .triangle-2 {
+                border-left: 30px solid transparent;
+                border-right: 30px solid transparent;
+                border-bottom: 50px solid #8CE8C3;
+            }
+
+            .hexagon-1 {
+                width: 70px;
+                height: 40.41px;
+            }
+
+            .hexagon-1::before,
+            .hexagon-1::after {
+                border-left: 35px solid transparent;
+                border-right: 35px solid transparent;
+            }
+
+            .hexagon-1::before {
+                border-bottom: 20.21px solid #8CE8C3;
+            }
+
+            .hexagon-1::after {
+                border-top: 20.21px solid #8CE8C3;
+            }
+
+            .hexagon-2 {
+                width: 50px;
+                height: 28.87px;
+            }
+
+            .hexagon-2::before,
+            .hexagon-2::after {
+                border-left: 25px solid transparent;
+                border-right: 25px solid transparent;
+            }
+
+            .hexagon-2::before {
+                border-bottom: 14.43px solid #8CE8C3;
+            }
+
+            .hexagon-2::after {
+                border-top: 14.43px solid #8CE8C3;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="preloader">
+        <div class="spinner"></div>
+    </div>
+
+    <header>
+        <div class="container">
+            <div class="logo">Yose Elvis</div>
+            <nav>
+                <ul>
+                    <li><a href="#about">About </a></li>
+                    <li><a href="#experience">Experience</a></li>
+                    <li><a href="#certificate">Certificate</a></li>
+                    <li><a href="#skills">Skills</a></li>
+                    <li><a href="#project">Project</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="geometric-shapes">
+            <div class="shape circle-1"></div>
+            <div class="shape circle-2"></div>
+            <div class="shape triangle-1"></div>
+            <div class="shape triangle-2"></div>
+            <div class="shape hexagon-1"></div>
+            <div class="shape hexagon-2"></div>
+        </div>
+        <div class="container">
+            <div class="hero-content">
+                <p>HELLO, I'M YOSE ELVIS SAPUTRA</p>
+                <h1><span class="typing-text">Data Enthusiasts</span></h1>
+                <p>Undergraduate Information Systems, President University | RnD PUMA IS | PBI Data Science @ ID/x Partners.</p>
+                <div class="hero-buttons">
+                    <a href="https://www.linkedin.com/in/yoseelvissaputra/" class="btn primary">View More</a>
+                    <a href="/public/Yose Elvis.pdf" class="btn secondary">Get CV</a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <img src="/public/image/image1.png" alt="Yose Elvis - Data Enthusiasts">
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="about">
+        <div class="container">
+            <div class="about-content">
+                <h2>About Me</h2>
+                <h3>Data Enthusiasts</h3>
+                <p>Hi, I’m Yose Elvis Saputra, an Information Systems student at President University, currently holding a GPA of 3.75. I have a strong passion for Data Science and IT Project Management. I am dedicated to enhancing my skills through hands-on projects and internships, and I enjoy working collaboratively to solve complex problems and deliver effective solutions. Continuous learning and professional growth are my main drives in the tech industry.</p>
+                <h4>Social Media</h4>
+                <div class="hobbies">
+                    <div class="hobby-item">
+                        <a href="https://www.instagram.com/yoseelvis/" target="_blank">
+                            <i class="bi bi-instagram"></i>
+                        </a>
+                    </div>
+                    <div class="hobby-item">
+                        <a href="https://discord.com/users/yoseelvis#1234" target="_blank">
+                            <i class="bi bi-discord"></i>
+                        </a>
+                    </div>
+                    <div class="hobby-item">
+                        <a href="https://www.linkedin.com/in/yoseelvissaputra/" target="_blank">
+                            <i class="bi bi-linkedin"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="about-image">
+                <img src="/public/image/myface.jpg" alt="My Photo">
+            </div>
+        </div>
+    </section>
+
+    <section id="experience" class="experience">
+        <div class="geometric-shapes">
+            <div class="shape circle-1"></div>
+            <div class="shape circle-2"></div>
+            <div class="shape triangle-1"></div>
+            <div class="shape triangle-2"></div>
+            <div class="shape hexagon-1"></div>
+            <div class="shape hexagon-2"></div>
+        </div>
+        <div class="container">
+            <div class="title-experience">
+                <h3>Experience</h3>
+            </div>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-icon">•</div>
+                    <div class="timeline-content">
+                        <h4>Research and Development Member</h4>
+                        <h5>PUMA IS (President University Management Association – Information Systems Division)</h5>
+                        <p>Jan 2024 – Present</p>
+                        <p>PUMA IS is the official student organization for Information Systems students at President University, dedicated to skill development, event organization, and fostering student collaboration.</p>
+                        <p>Participate in project research and development initiatives to support organizational goals.</p>
+                        <div class="sub-timeline">
+                            <div class="sub-timeline-item">
+                                <div class="sub-timeline-icon">•</div>
+                                <h4>PIC Sponsorship</h4>
+                                <h5>Temu Alumni (TA)</h5>
+                                <p>Mar 2025 – Present</p>
+                                <p>- Manage sponsorship acquisition and maintain relationships with sponsors to secure funding for alumni events.</p>
+                                <p>- Coordinate with internal teams and external partners to ensure successful event implementation.</p>
+                                <div class="timeline-images">
+                                    <img src="/public/image/TAcertif.png" alt="Documentation 1">
+                                </div>
+                            </div>
+                            <div class="sub-timeline-item">
+                                <div class="sub-timeline-icon">•</div>
+                                <h4>PIC Event Organizer</h4>
+                                <h5>Golden Code: Hackathon 2025</h5>
+                                <p>Mar 2025 – May 2025</p>
+                                <p>- Lead event logistics, communication, and promotion efforts for a campus hackathon with 200+ participants.</p>
+                                <p>- Collaborate with sponsors, vendors, and volunteers to deliver a seamless event experience.</p>
+                                <div class="timeline-images">
+                                    <img src="/public/image/Hacakthoncertif.png" alt="Documentation 1">
+                                    <img src="/public/image/EOHackathon1.JPG" alt="Documentation 2">
+                                    <img src="/public/image/EOHackathon2.jpg" alt="Documentation 3">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-icon">•</div>
+                    <div class="timeline-content">
+                        <h4>Aquanomic</h4>
+                        <p>Jan 2025 – April 2025</p>
+                        <p>Led the development of a community-focused website aimed at empowering coastal fishermen through digital literacy and product marketing.</p>
+                        <p>Coordinated collaboration between Information Systems students and Fisheries students to design user-friendly features.</p>
+                        <p>Managed project timelines and ensured deliverables met quality standards.</p>
+                        <div class="timeline-images">
+                            <img src="/public/image/Aquanomic1.JPG" alt="Documentation 1">
+                            <img src="/public/image/Aquanomic2.JPG" alt="Documentation 2">
+                            <img src="/public/image/Aquanomic3.JPG" alt="Documentation 3">
+                        </div>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-icon">•</div>
+                    <div class="timeline-content">
+                        <h4>PreUtix</h4>
+                        <p>Sep 2024 – Dec 2024</p>
+                        <p>Developed a simple event management platform to facilitate event registration and participant tracking.</p>
+                        <p>Implemented basic front-end design using HTML and CSS, focusing on usability and responsiveness.</p>
+                        <p>Worked closely with teammates to gather user feedback and improve the platform iteratively.</p>
+                        <div class="timeline-images">
+                            <img src="/public/image/preutix1.png" alt="Documentation 1">
+                            <img src="/public/image/preutix2.jpg" alt="Documentation 2">
+                        </div>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-icon">•</div>
+                    <div class="timeline-content">
+                        <h4>Data Science Intern</h4>
+                        <h5>PBI & ID/x Partners</h5>
+                        <p>Jun 2025 – Aug 2025</p>
+                        <p>ID/x Partners is a fintech and business consulting company focusing on data-driven business solutions.</p>
+                        <p>Assisted with data cleaning, analysis, and visualization to support strategic decision-making.</p>
+                        <p>Worked alongside cross-functional teams to develop and implement data science models.</p>
+                        <p>Prepared reports and presentations to communicate insights to key stakeholders.</p>
+                        <div class="timeline-images">
+                            <img src="/public/image/Screenshot 2025-09-04 185338.png" alt="Documentation 1">
+                            <img src="/public/image/Screenshot 2025-09-04 185507.png" alt="Documentation 2">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="certificate" class="certificate">
+        <div class="container">
+            <h3>Certificate</h3>
+            <div class="certificate-carousel">
+                <div class="certificate-grid">
+                    <div class="certificate-item">
+                        <h5>Certificate of Appreciation – PIC Event Organizer, Golden Code: Hackathon 2025</h5>
+                        <p>PUMA(President University Major Association) IS - May 2025</p>
+                        <img src="/public/image/HackathonCertif.png" alt="Certificate 1">
+                    </div>
+                    <div class="certificate-item">
+                        <h5>Certificate of Appreciation – Sponsorship, Temu Alumni 2025</h5>
+                        <p>PUMA(President University Major Association) IS - March 2025</p>
+                        <img src="/public/image/TAcertif.png" alt="Certificate 2">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="skills" class="skills">
+        <div class="geometric-shapes">
+            <div class="shape circle-1"></div>
+            <div class="shape circle-2"></div>
+            <div class="shape triangle-1"></div>
+            <div class="shape triangle-2"></div>
+            <div class="shape hexagon-1"></div>
+            <div class="shape hexagon-2"></div>
+        </div>
+        <div class="container">
+            <h2>My Skills</h2>
+            <div class="skills-container">
+                <div class="skill-item">
+                    <i class="bi bi-filetype-py"></i>
+                    <span>Python</span>
+                </div>
+                <div class="skill-item">
+                    <i class="bi bi-cpu"></i>
+                    <span>C++ (Arduino)</span>
+                </div>
+                <div class="skill-item">
+                    <i class="bi bi-file-code"></i>
+                    <span>HTML & CSS</span>
+                </div>
+                <div class="skill-item">
+                    <i class="bi bi-filetype-php"></i>
+                    <span>PHP</span>
+                </div>
+                <div class="skill-item">
+                    <i class="bi bi-filetype-xls"></i>
+                    <span>Excel</span>
+                </div>
+                <div class="skill-item">
+                    <i class="bi bi-brush"></i>
+                    <span>Figma</span>
+                </div>
+                <div class="skill-item">
+                    <i class="bi bi-palette"></i>
+                    <span>Canva</span>
+                </div>
+                <div class="skill-item">
+                    <i class="bi bi-kanban"></i>
+                    <span>Agile (Scrum)</span>
+                </div>
+                <div class="skill-item">
+                    <i class="bi bi-filetype-py"></i>
+                    <span>Pandas</span>
+                </div>
+                <div class="skill-item">
+                    <i class="bi bi-filetype-py"></i>
+                    <span>NumPy</span>
+                </div>
+                <div class="skill-item">
+                    <i class="bi bi-filetype-py"></i>
+                    <span>scikit-learn</span>
+                </div>
+                <div class="skill-item">
+                    <i class="bi bi-bar-chart"></i>
+                    <span>Matplotlib</span>
+                </div>
+                <div class="skill-item">
+                    <i class="bi bi-journal-code"></i>
+                    <span>Jupyter</span>
+                </div>
+                <div class="skill-item">
+                    <i class="bi bi-code-square"></i>
+                    <span>VS Code</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="project" class="project">
+        <div class="container">
+            <h2>My Projects</h2>
+            <h3>Recent Works</h3>
+            <div class="portfolio-carousel">
+                <div class="portfolio-slide active" id="slide-1">
+                    <img src="/public/image/.png" alt="Credit Risk Model">
+                    <div class="content">
+                        <h4>Credit Risk Model</h4>
+                        <p>A machine learning model to assess credit risk, built using Python and scikit-learn for predictive analysis.</p>
+                    </div>
+                </div>
+                <div class="portfolio-slide" id="slide-2">
+                    <img src="/public/image/online-event-registration-removebg-preview.png" alt="Event Ticketing Website">
+                    <div class="content">
+                        <h4>Event Ticketing Website</h4>
+                        <p>A web platform for event registration and ticketing, developed with HTML, CSS, and PHP for seamless user experience.</p>
+                    </div>
+                </div>
+                <div class="carousel-controls">
+                    <button class="carousel-btn prev"><i class="bi bi-chevron-left"></i></button>
+                    <button class="carousel-btn next"><i class="bi bi-chevron-right"></i></button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="contact">
+        <div class="geometric-shapes">
+            <div class="shape circle-1"></div>
+            <div class="shape circle-2"></div>
+            <div class="shape triangle-1"></div>
+            <div class="shape triangle-2"></div>
+            <div class="shape hexagon-1"></div>
+            <div class="shape hexagon-2"></div>
+        </div>
+        <div class="container">
+            <h2>Contact Me</h2>
+            <h3>Get in Touch</h3>
+            <div class="contact-grid">
+                <div class="contact-info">
+                    <h4>Contact Information</h4>
+                    <p>Feel free to reach out to me anytime. I would love to hear from you!</p>
+                    <div class="info-item">
+                        <span>📍</span>
+                        <p>Yose Elvis Saputra</p>
+                    </div>
+                    <div class="info-item">
+                        <span>📞</span>
+                        <p>+62 815-1112-3019</p>
+                    </div>
+                    <div class="info-item">
+                        <span>📧</span>
+                        <p>yoseelvis1304@gmail.com</p>
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <form action="#">
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            <input type="text" id="name" placeholder="Your name">
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" placeholder="Your email">
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" placeholder="Your message"></textarea>
+                        </div>
+                        <button type="submit" class="btn primary">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-logo">Yose Elvis Saputra</div>
+            <div class="footer-text">
+                <p>Copyright © 2024 Yose Elvis Saputra. All rights reserved.</p>
+                <p>Developed by Yose</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Preloader
+            const preloader = document.getElementById('preloader');
+            window.addEventListener('load', () => {
+                preloader.classList.add('hidden');
+                document.body.style.overflow = 'visible';
+            });
+
+            // Smooth scrolling for nav links
+            const navLinks = document.querySelectorAll('nav a[href^="#"]');
+            for (const link of navLinks) {
+                link.addEventListener('click', smoothScroll);
+            }
+
+            function smoothScroll(event) {
+                event.preventDefault();
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                window.scrollTo({
+                    top: targetElement.offsetTop - 80, // Adjust for fixed header
+                    behavior: 'smooth'
+                });
+            }
+
+            // Header hide/show on scroll
+            let prevScrollpos = window.pageYOffset;
+            window.onscroll = function() {
+                let currentScrollPos = window.pageYOffset;
+                if (prevScrollpos > currentScrollPos) {
+                    document.querySelector("header").style.top = "0";
+                } else {
+                    document.querySelector("header").style.top = "-80px"; // Adjust based on header height
+                }
+                prevScrollpos = currentScrollPos;
+            }
+
+            // Intersection Observer for animations
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: "0px 0px -50px 0px"
+            };
+
+            const sectionObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    } else {
+                        entry.target.classList.remove('visible');
+                    }
+                });
+            }, observerOptions);
+
+            // Hero image
+            const heroImage = document.querySelector('.hero-image');
+            sectionObserver.observe(heroImage);
+
+            // About section
+            const aboutContent = document.querySelector('.about-content');
+            const aboutImage = document.querySelector('.about-image');
+            sectionObserver.observe(aboutContent);
+            sectionObserver.observe(aboutImage);
+
+            // Experience section
+            const timeline = document.querySelector('.timeline');
+            sectionObserver.observe(timeline);
+
+            // Certificate section
+            const certificateContainer = document.querySelector('.certificate .container');
+            sectionObserver.observe(certificateContainer);
+
+            // Skills section
+            const skillsContainer = document.querySelector('.skills-container');
+            sectionObserver.observe(skillsContainer);
+
+            // Contact section
+            const contactContainer = document.querySelector('.contact .container');
+            sectionObserver.observe(contactContainer);
+
+            // Button hover effects
+            const buttons = document.querySelectorAll('.btn');
+            buttons.forEach(button => {
+                button.addEventListener('mouseover', () => {
+                    button.style.transform = 'scale(1.05)';
+                });
+                button.addEventListener('mouseout', () => {
+                    button.style.transform = 'scale(1)';
+                });
+            });
+
+            // Timeline icon pulse animation
+            const timelineIcons = document.querySelectorAll('.timeline-icon, .sub-timeline-icon');
+            timelineIcons.forEach(icon => {
+                icon.style.transition = 'transform 0.3s ease';
+                icon.addEventListener('mouseover', () => {
+                    icon.style.transform = 'scale(1.2)';
+                });
+                icon.addEventListener('mouseout', () => {
+                    icon.style.transform = 'scale(1)';
+                });
+            });
+
+            // Typing animation text switching
+            const typingText = document.querySelector('.typing-text');
+            const texts = ['Event Organizer'];
+            let index = 0;
+
+            function switchText() {
+                typingText.classList.add('reset-typing');
+                typingText.textContent = texts[index];
+                void typingText.offsetWidth;
+                typingText.classList.remove('reset-typing');
+                index = (index + 1) % texts.length;
+                setTimeout(switchText, 5000);
+            }
+
+            setTimeout(switchText, 5000);
+
+            // Certificate carousel duplication for infinite loop
+            const carouselTrack = document.querySelector('.certificate-grid');
+            if (carouselTrack) {
+                // Duplicate the content multiple times to ensure smooth looping
+                carouselTrack.innerHTML += carouselTrack.innerHTML + carouselTrack.innerHTML + carouselTrack.innerHTML;
+            }
+
+            // Project Carousel JavaScript
+            const slides = document.querySelectorAll('.portfolio-slide');
+            const prevBtn = document.querySelector('.carousel-btn.prev');
+            const nextBtn = document.querySelector('.carousel-btn.next');
+            let currentIndex = 0;
+
+            function showSlide(index) {
+                slides.forEach((slide, i) => {
+                    slide.classList.toggle('active', i === index);
+                });
+            }
+
+            prevBtn.addEventListener('click', () => {
+                currentIndex = (currentIndex > 0) ? currentIndex - 1 : slides.length - 1;
+                showSlide(currentIndex);
+            });
+
+            nextBtn.addEventListener('click', () => {
+                currentIndex = (currentIndex < slides.length - 1) ? currentIndex + 1 : 0;
+                showSlide(currentIndex);
+            });
+
+            // Initial show
+            showSlide(currentIndex);
+        });
+    </script>
+</body>
+</html>
